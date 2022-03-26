@@ -53,10 +53,18 @@ func main() {
   
   // gets the number of wins required to win
   var wins = -1
-  while(wins == -1) {
+  while (true) {
     print("How many wins to win: ")
     let winsString = readLine()
-    wins = Int(winsString!) ?? -1
+    // makes sure the input is a positive nonzero int
+    do {
+      wins = Int(winsString!) ?? -1
+      if (wins > 0) {
+        break
+      } else {
+        print("Please input a nonzero positive int")
+      }
+    }
   }
 
   // define vars
@@ -70,11 +78,12 @@ func main() {
 
     // generates computers guess
     let computerGuess = Int.random(in: 0..<3)
+    var invalidGuess = true
 
     // gets users guess
     while(invalidGuess == true) {
       invalidGuess = false
-      print("Guess rock paper scissors, r p s, or 1 2 3")
+      print("Guess: rock paper scissors, r p s, or 1 2 3")
       let userGuess = readLine()
 
       // then converts the guess into an absolute value
@@ -125,7 +134,7 @@ func main() {
   }
   
   // after the game is over prints the total score
-  print("The score was", userWins, "-", computerWins, "-", ties)
+  print("Well played, the score was", userWins, "-", computerWins, "-", ties)
 }
 
 // calls main to start the program
